@@ -24,8 +24,6 @@ export default function WhishList() {
       setIsLoading(false);
       alert(response.data.message);
     }
-
-    console.log(response.data.data);
   }
 
   async function addToCart(productId) {
