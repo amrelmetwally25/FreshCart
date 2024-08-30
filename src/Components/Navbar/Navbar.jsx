@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../../Context/UserContext";
 import logo from "../../assets/shopping-logo.jpg";
@@ -8,22 +8,12 @@ export default function Navbar() {
   let { userLogin, setUserLogin } = useContext(UserContext);
   let { cart } = useContext(CartContext);
   let navigate = useNavigate();
-  const [isToggleVisible, setIsToggleVisible] = useState(false);
 
   function logOut() {
     localStorage.removeItem("userToken");
     setUserLogin(null);
     navigate("/login");
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setIsToggleVisible(window.innerWidth < 768);
-    };
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Set initial state
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <nav className="bg-[#f8f9fb] dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
@@ -41,7 +31,7 @@ export default function Navbar() {
                 <li>
                   <NavLink
                     to="/cart"
-                    className="cursor-pointer block py-2 px-3 relative  text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="cursor-pointer block py-2 px-3 relative text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <i className="fa-solid fa-cart-shopping text-3xl">
                       <span className="bg-red-600 text-white py-1 px-2 rounded-3xl text-xs absolute top-0 right-1">
@@ -82,32 +72,30 @@ export default function Navbar() {
               </>
             )}
           </ul>
-          {isToggleVisible && (
-            <button
-              data-collapse-toggle="navbar-sticky"
-              type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
-              aria-controls="navbar-sticky"
-              aria-expanded="false"
+          <button
+            data-collapse-toggle="navbar-sticky"
+            type="button"
+            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"
+            aria-controls="navbar-sticky"
+            aria-expanded="false"
+          >
+            <span className="sr-only">Open main menu</span>
+            <svg
+              className="w-5 h-5"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 17 14"
             >
-              <span className="sr-only">Open main menu</span>
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 17 14"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M1 1h15M1 7h15M1 13h15"
-                />
-              </svg>
-            </button>
-          )}
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 1h15M1 7h15M1 13h15"
+              />
+            </svg>
+          </button>
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto"
@@ -176,29 +164,29 @@ export default function Navbar() {
                   </span>
                 </li>
               </>
-            ) : <>
-            <li className="block md:hidden">
-              <NavLink
-                className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
-                to="/login"
-              >
-                Login
-              </NavLink>
-            </li>
-            <li className="block md:hidden">
-              <NavLink
-                className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
-                to="/register"
-              >
-                Register
-              </NavLink>
-            </li>
-          </>}
+            ) : (
+              <>
+                <li className="block md:hidden">
+                  <NavLink
+                    className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                    to="/login"
+                  >
+                    Login
+                  </NavLink>
+                </li>
+                <li className="block md:hidden">
+                  <NavLink
+                    className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                    to="/register"
+                  >
+                    Register
+                  </NavLink>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
     </nav>
   );
 }
-
-
