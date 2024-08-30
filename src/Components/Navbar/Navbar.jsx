@@ -63,7 +63,7 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <li>
+                <li className="hidden md:block">
                   <NavLink
                     className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
                     to="/login"
@@ -71,7 +71,7 @@ export default function Navbar() {
                     Login
                   </NavLink>
                 </li>
-                <li>
+                <li className="hidden md:block">
                   <NavLink
                     className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
                     to="/register"
@@ -176,7 +176,24 @@ export default function Navbar() {
                   </span>
                 </li>
               </>
-            ) : null}
+            ) : <>
+            <li className="block md:hidden">
+              <NavLink
+                className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                to="/login"
+              >
+                Login
+              </NavLink>
+            </li>
+            <li className="block md:hidden">
+              <NavLink
+                className="block py-2 px-3 bg-[#f8f9fb] text-gray-900 rounded hover:bg-gray-100 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white"
+                to="/register"
+              >
+                Register
+              </NavLink>
+            </li>
+          </>}
           </ul>
         </div>
       </div>
